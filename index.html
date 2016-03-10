@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<!-- This code is based on the Bootstrap Side Bar Template -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Software Risk Assessment Tool for SmartGrids</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+<link href="css/main.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
+<style type="text/css">
+    .bs-example{
+    	margin: 20px;
+    }
+	/* Fix alignment issue of label on extra small devices in Bootstrap 3.2 */
+    .form-horizontal .control-label{
+        padding-top: 7px;
+    }
+</style>
+</head>
+<body>
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title" id="helpModal">How to quantify Criticality, Occurrence and Recovery</h4>
+            </div>
+            <div class="modal-body">
+                <h3>Recovery</h3>
+                <p>Consider the likelihood of control systems detecting the failure in the SmartGrid component and how long it takes for the cause to be identified and recovery procedures to commence. Accordingly, assign the failure a recovery/detection number from 1 to 10:</p>
+                <div class="row">
+                	<div class="col-xs-6">
+                		<ul>
+                			<li><b>1.</b> Almost certain detection </li>
+                			<li><b>2.</b> Very high chance of detection </li>
+                			<li><b>3.</b> High chance of detection</li>
+                			<li><b>4.</b> Moderately high chance of detection</li>
+                			<li><b>5.</b> Moderate chance of detection</li>
+                		</ul>
+                	</div>
+                	<div class="col-xs-6">
+                		<ul>
+                			<li><b>6.</b> Low chance of detection</li>
+                			<li><b>7.</b> Very low chance of detection</li>
+                			<li><b>8.</b> Remote chance of detection</li>
+                			<li><b>9.</b> Very remote chance of detection</li>
+                			<li><b>10.</b> Uncertain detection or no control systems</li>
+                		</ul>
+                	</div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+  </div>
+</div>
+<div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        SmartGrid
+                        <br>
+                        Risk Assessment Tool
+                    </a>
+                    
+                </li>
+                <li>
+                    <a href="#">&#9889; &#9889; &#9889; &#9889; &#9889; &#9889; &#9889; &#9889; &#9889; &#9889; &#9889; &#9889; &#9889; &#9889; &#9889; &#9889; &#9889; &#9889; &#9889; &#9889;</a>
+                </li>
+                <li>
+                    <a href="#FMECA">FMECA</a>
+                </li>
+                <li>
+                    <a href="#faultTree">Fault Tree Analysis</a>
+                </li>
+                <li>
+                    <a href="#">Risk Mitigation</a>
+                </li>
+                <li>
+               
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+
+                <div id="FMECA" class="row">
+                    <div class="col-lg-12">
+                        <h1>Failure Modes, Effects and Criticality Analysis</h1>
+                        <p>This page will allow you to ascertain the software risks associated with a SmartGrid deployment through the use of the FMECA methodology. The tool below is designed to help you reason about where to invest in securing your SmartGrid infrastructure. It performs risk calculations based on your input and reveals where your grid's strong and weak points are in the facea of a software failure or cyber attack.</p>
+                        <p>Review the list of threats and choose a failure mode for each one. Then, input criticality, occurence and recovery ratings for each one. The chart on the right side will be updated in real time, showing you the Risk Priority Numbers associated with each threat. The higher the number, the larger the impact that potential failure might have on your business.</p>
+                        <div class="bs-example">
+						    <form class="form-horizontal">
+						        <div class="form-group">
+						            <label for="inputEmail" class="control-label col-xs-2">Power Infrastructure Software Failure</label>
+						            <div class="col-xs-1">
+							            <div class="dropdown">
+							            	<button type="button" class="btn btn-default dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Component <span class="caret"></span></button>
+							            	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+											    <li><a href="#">Existing Power Infrastructure Interfaces</a></li>
+											    <li><a href="#">EMS</a></li>
+											    <li><a href="#">DMS</a></li>
+											    <li><a href="#">Demand Response</a></li>
+											    <li><a href="#">Data Handler</a></li>
+											    <li><a href="#">Distribution and Subdistribution</a></li>
+											    <li><a href="#">Smart Meters</a></li>
+											 </ul>
+							            </div>
+						            </div>
+						            <div class="col-xs-1">
+						            	<div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Criticality&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Occurrence&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Recovery&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#" data-toggle="modal" data-target="#basicModal">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						        </div>
+						        <div class="form-group">
+						            <label for="inputEmail" class="control-label col-xs-2">Energy Management System (EMS) Failure</label>
+						             <div class="col-xs-1">
+							            <div class="dropdown">
+							            	<button type="button" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Failure mode <span class="caret"></span></button>
+							            	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+											    <li><a href="#">Complete</a></li>
+											    <li><a href="#">Partial</a></li>
+											    <li><a href="#">Intermittent</a></li>
+											    <li><a href="#">Gradual</a></li>
+											 </ul>
+							            </div>
+						            </div>
+						            <div class="col-xs-1">
+						            	<div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Criticality&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Occurrence&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Recovery&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#" data-toggle="modal" data-target="#basicModal">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						        </div>
+						        <div class="form-group">
+						            <label for="inputPassword" class="control-label col-xs-2">Distribution Management System (DMS) Failure</label>
+						             <div class="col-xs-1">
+							            <div class="dropdown">
+							            	<button type="button" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Failure mode <span class="caret"></span></button>
+							            	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+											    <li><a href="#">Complete</a></li>
+											    <li><a href="#">Partial</a></li>
+											    <li><a href="#">Intermittent</a></li>
+											    <li><a href="#">Gradual</a></li>
+											 </ul>
+							            </div>
+						            </div>
+						            <div class="col-xs-1">
+						            	<div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Criticality&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Occurrence&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Recovery&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#" data-toggle="modal" data-target="#basicModal">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						        </div>
+						        <div class="form-group">
+						            <label for="inputEmail" class="control-label col-xs-2">Demand Response System Failure</label>
+						             <div class="col-xs-1">
+							            <div class="dropdown">
+							            	<button type="button" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Failure mode <span class="caret"></span></button>
+							            	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+											    <li><a href="#">Complete</a></li>
+											    <li><a href="#">Partial</a></li>
+											    <li><a href="#">Intermittent</a></li>
+											    <li><a href="#">Gradual</a></li>
+											 </ul>
+							            </div>
+						            </div>
+						            <div class="col-xs-1">
+						            	<div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Criticality&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Occurrence&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Recovery&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#" data-toggle="modal" data-target="#basicModal">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						        </div>
+						        <div class="form-group">
+						            <label for="inputEmail" class="control-label col-xs-2">Data Handler Failure</label>
+						             <div class="col-xs-1">
+							            <div class="dropdown">
+							            	<button type="button" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Failure mode <span class="caret"></span></button>
+							            	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+											    <li><a href="#">Complete</a></li>
+											    <li><a href="#">Partial</a></li>
+											    <li><a href="#">Intermittent</a></li>
+											    <li><a href="#">Gradual</a></li>
+											 </ul>
+							            </div>
+						            </div>
+						            <div class="col-xs-1">
+						            	<div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Criticality&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Occurrence&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#" >Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Recovery&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#" data-toggle="modal" data-target="#basicModal">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						        </div>
+						        <div class="form-group">
+						            <label for="inputEmail" class="control-label col-xs-2">Smart Meter Failure</label>
+						             <div class="col-xs-1">
+							            <div class="dropdown">
+							            	<button type="button" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Failure mode <span class="caret"></span></button>
+							            	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+											    <li><a href="#">Complete</a></li>
+											    <li><a href="#">Partial</a></li>
+											    <li><a href="#">Intermittent</a></li>
+											    <li><a href="#">Gradual</a></li>
+											 </ul>
+							            </div>
+						            </div>
+						            <div class="col-xs-1">
+						            	<div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Criticality&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Occurrence&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Recovery&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#" data-toggle="modal" data-target="#basicModal">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						        </div>
+						        <div class="form-group">
+						            <label for="inputEmail" class="control-label col-xs-2">Distribution and Subdistribution Node Software Failure</label>
+						             <div class="col-xs-1">
+							            <div class="dropdown">
+							            	<button type="button" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Failure mode <span class="caret"></span></button>
+							            	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+											    <li><a href="#">Complete</a></li>
+											    <li><a href="#">Partial</a></li>
+											    <li><a href="#">Intermittent</a></li>
+											    <li><a href="#">Gradual</a></li>
+											 </ul>
+							            </div>
+						            </div>
+						            <div class="col-xs-1">
+						            	<div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Criticality&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Occurrence&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Recovery&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#" data-toggle="modal" data-target="#basicModal">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						        </div>
+						        <div class="form-group">
+						            <label for="inputEmail" class="control-label col-xs-2">Smart Meter Data Breach (External)</label>
+						             <div class="col-xs-1">
+							            <div class="dropdown">
+							            	<button type="button" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Failure mode <span class="caret"></span></button>
+							            	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+											    <li><a href="#">Complete</a></li>
+											    <li><a href="#">Partial</a></li>
+											    <li><a href="#">Intermittent</a></li>
+											    <li><a href="#">Gradual</a></li>
+											 </ul>
+							            </div>
+						            </div>
+						            <div class="col-xs-1">
+						            	<div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Criticality&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Occurrence&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Recovery&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#" data-toggle="modal" data-target="#basicModal">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						        </div>
+						        <div class="form-group">
+						            <label for="inputEmail" class="control-label col-xs-2">Distribution and Subdistribution Node Data Breach (External)</label>
+						             <div class="col-xs-1">
+							            <div class="dropdown">
+							            	<button type="button" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Failure mode <span class="caret"></span></button>
+							            	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+											    <li><a href="#">Complete</a></li>
+											    <li><a href="#">Partial</a></li>
+											    <li><a href="#">Intermittent</a></li>
+											    <li><a href="#">Gradual</a></li>
+											 </ul>
+							            </div>
+						            </div>
+						            <div class="col-xs-1">
+						            	<div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Criticality&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Occurrence&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Recovery&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#" data-toggle="modal" data-target="#basicModal">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						        </div>
+						        <div class="form-group">
+						            <label for="inputEmail" class="control-label col-xs-2">Core Grid Systems Data Breach (External)</label>
+						             <div class="col-xs-1">
+							            <div class="dropdown">
+							            	<button type="button" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Failure mode <span class="caret"></span></button>
+							            	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+											    <li><a href="#">Complete</a></li>
+											    <li><a href="#">Partial</a></li>
+											    <li><a href="#">Intermittent</a></li>
+											    <li><a href="#">Gradual</a></li>
+											 </ul>
+							            </div>
+						            </div>
+						            <div class="col-xs-1">
+						            	<div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Criticality&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Occurrence&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Recovery&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#" data-toggle="modal" data-target="#basicModal">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						        </div>
+						        <div class="form-group">
+						            <label for="inputEmail" class="control-label col-xs-2">Core Grid Systems Data Breach (Internal)</label>
+						             <div class="col-xs-1">
+							            <div class="dropdown">
+							            	<button type="button" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Failure mode <span class="caret"></span></button>
+							            	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+											    <li><a href="#">Complete</a></li>
+											    <li><a href="#">Partial</a></li>
+											    <li><a href="#">Intermittent</a></li>
+											    <li><a href="#">Gradual</a></li>
+											 </ul>
+							            </div>
+						            </div>
+						            <div class="col-xs-1">
+						            	<div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Criticality&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Occurrence&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						            <div class="col-xs-1">
+						                <div class="dropdown">
+						                	<input type="email" class="form-control dropdown-toggle" id="inputEmail" placeholder="Recovery&#10067;" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						                	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											    <li><a href="#" data-toggle="modal" data-target="#basicModal">Help me determine it...</a></li>
+											 </ul>
+						                </div>
+						            </div>
+						        </div>
+						        <div class="col-xs-4">
+						        	<button type="button" class="btn btn-success btn-lg btn-block">Add a custom threat</button>
+						        </div>
+						    </form>
+						</div>
+                    </div>
+                </div>
+                <div id="faultTree" class="row">
+                	</br>
+	            	<h1>Fault Tree Analysis </h1>
+						<p>Select a component from the list below to start building a tree of causes and effects for the threats associated with it. The tree builder will take into account the threats on the FMECA page that have been explicitly associated with your chosen component and attemp to guide you in every step.</p>
+						<div class="row">
+							<div class="col-xs-8">
+								<button type="button" class="btn btn-default btn-lg">Existing Power Infrastructure Interfaces</button>
+								<button type="button" class="btn btn-default btn-lg">EMS</button>
+								<button type="button" class="btn btn-default btn-lg">DMS</button>
+								<button type="button" class="btn btn-default btn-lg">Demand Response</button>
+								<button type="button" class="btn btn-default btn-lg">Data Handler</button>
+								<button type="button" class="btn btn-default btn-lg">Distribution and Subdistribution</button>
+								<button type="button" class="btn btn-default btn-lg">Smart Meters</button>
+							</div>
+						</div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+</div>
+
+</body>
+</html>                                 		
