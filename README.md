@@ -1,3 +1,3 @@
 # Safety-Critical-Systems-4-H-Project
 
-Barebones prototype of a system capable of evaluating the performance of a smart grid.
+Barebones prototype of a web tool that evaluates the risks associated with the operation of a smart grid.
